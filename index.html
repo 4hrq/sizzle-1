@@ -3,238 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sizzle Restaurant | مطعم سيزل</title>
+    <title>منيو مطعم Sizzle</title>
     <style>
-        /* الإعدادات الأساسية والألوان */
         body {
-            background-color: #ffffff;
-            color: #800000;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
             margin: 0;
             padding: 0;
-            text-align: center;
         }
-
-        /* العبارة الترحيبية */
-        .header {
-            padding: 30px 20px;
+        header {
+            background-color: #ff4757;
+            color: white;
+            padding: 20px;
             font-size: 28px;
             font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
-        /* قسم المنيو */
-        .menu-section {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            flex-wrap: wrap;
+        .menu-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
         }
-
-        .menu-section img {
-            max-width: 100%;
-            width: 450px; 
-            border: 2px solid #800000;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        /* قسم الفروع */
-        .branches-section {
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
-        .branch-card {
-            border: 2px solid #800000;
-            border-radius: 15px;
-            padding: 20px;
-            width: 350px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            background-color: #fff;
-        }
-
-        .branch-card h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* مربع الخريطة التفاعلي (بديل الصورة) */
-        .map-box {
+        img {
             width: 100%;
-            height: 150px;
-            background-color: #f8f9fa;
-            border: 2px dashed #800000;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: 0.3s;
+            max-width: 650px;
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
-
-        .map-box:hover {
-            background-color: #ffe6e6;
+        .locations {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-
-        .map-box span {
-            font-size: 40px;
-            margin-bottom: 10px;
+        .locations h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 22px;
         }
-
-        .map-box p {
-            margin: 0;
-            font-weight: bold;
-            color: #800000;
-            font-size: 14px;
-        }
-
-        /* أزرار التواصل */
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
         .btn {
-            padding: 12px;
-            border-radius: 8px;
+            display: inline-block;
+            background-color: #2ed573;
+            color: white;
+            padding: 12px 24px;
+            margin: 10px;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: bold;
             font-size: 16px;
-            color: #ffffff;
-            transition: 0.3s;
+            transition: background 0.3s;
         }
-
-        .btn-call {
-            background-color: #800000; 
+        .btn:hover {
+            background-color: #27ae60;
         }
-
-        .btn-call:hover {
-            background-color: #5c0000;
-        }
-
-        .btn-whatsapp {
-            background-color: #25D366; 
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #1ebe56;
-        }
-
-        /* نافذة اختيار الخريطة (Modal) */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            width: 300px;
-            border: 2px solid #800000;
-        }
-
-        .modal-content h3 {
-            margin-top: 0;
-            color: #800000;
-            margin-bottom: 20px;
-        }
-
-        .modal-btn {
-            display: block;
-            margin: 10px 0;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .btn-gmaps { background-color: #4285F4; }
-        .btn-waze { background-color: #33ccff; }
-        .btn-close { background-color: #888; border: none; cursor: pointer; width: 100%; font-size: 16px;}
-        
     </style>
 </head>
 <body>
 
-    <div class="header">
-        Sizzle: Where Flavor Comes Alive
-    </div>
+    <header>
+        منيو مطعم Sizzle
+    </header>
 
-    <div class="menu-section">
-        <img src="33401.jpg" alt="واجهة المنيو">
-        <img src="33400.jpg" alt="خلفية المنيو">
-    </div>
-
-    <div class="branches-section">
+    <div class="menu-container">
         
-        <div class="branch-card">
-            <h2>الفرع الأول: حي البساتين - شارع الضباط</h2>
-            
-            <div class="map-box" onclick="openMap('https://maps.app.goo.gl/xPtynwPnG17FfyqL7', 'حي البساتين شارع الضباط')">
-                <span>🗺️</span>
-                <p>اضغط هنا لعرض موقع الفرع على الخريطة</p>
-            </div>
-            
-            <div class="buttons-container">
-                <a href="tel:07700634208" class="btn btn-call">اتصال هاتفي</a>
-                <a href="https://wa.me/9647700634208" class="btn btn-whatsapp" target="_blank">مراسلة WhatsApp</a>
-            </div>
+        <div class="locations">
+            <h2>مواقع فروعنا</h2>
+            <a href="https://maps.app.goo.gl/xPtynwPnG17FfyqL7" target="_blank" class="btn">موقع فرع حي البساتين</a>
+            <a href="https://maps.app.goo.gl/MDYbZ2mGE9w6DGBw6" target="_blank" class="btn">موقع فرع الصابيات - الرواد الاثرية</a>
         </div>
 
-        <div class="branch-card">
-            <h2>الفرع الثاني: الصابيات - الرواد الاثرية</h2>
-            
-            <div class="map-box" onclick="openMap('https://maps.app.goo.gl/MDYbZ2mGE9w6DGBw6', 'الصابيات - الرواد الاثرية')">
-                <span>🗺️</span>
-                <p>اضغط هنا لعرض موقع الفرع على الخريطة</p>
-            </div>
-            
-            <div class="buttons-container">
-                <a href="tel:07700066443" class="btn btn-call">اتصال هاتفي</a>
-                <a href="https://wa.me/9647700066443" class="btn btn-whatsapp" target="_blank">مراسلة WhatsApp</a>
-            </div>
-        </div>
-
+        <img src="1.jpeg" alt="الصفحة الأولى من المنيو">
+        <img src="2.jpeg" alt="الصفحة الثانية من المنيو">
+        
     </div>
-
-    <div id="mapModal" class="modal">
-        <div class="modal-content">
-            <h3>اختر تطبيق الخرائط</h3>
-            <a id="gmapsLink" href="#" target="_blank" class="modal-btn btn-gmaps" onclick="closeModal()">Google Maps</a>
-            <a id="wazeLink" href="#" target="_blank" class="modal-btn btn-waze" onclick="closeModal()">Waze</a>
-            <button class="modal-btn btn-close" onclick="closeModal()">إلغاء</button>
-        </div>
-    </div>
-
-    <script>
-        function openMap(gmapsUrl, branchName) {
-            document.getElementById('gmapsLink').href = gmapsUrl;
-            document.getElementById('wazeLink').href = 'https://waze.com/ul?q=' + encodeURIComponent(branchName);
-            document.getElementById('mapModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('mapModal').style.display = 'none';
-        }
-    </script>
 
 </body>
 </html>
