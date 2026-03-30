@@ -3,82 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منيو مطعم Sizzle</title>
+    <title>مطعم سيزل - فروعنا</title>
     <style>
+        /* إعدادات الخطوط والخلفية */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
             margin: 0;
             padding: 0;
+            text-align: center;
+            color: #333;
         }
-        header {
+
+        /* تصميم الترحيب العلوي */
+        .header {
             background-color: #ff4757;
             color: white;
-            padding: 20px;
+            padding: 30px 20px;
             font-size: 28px;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
-        .menu-container {
-            max-width: 800px;
-            margin: 20px auto;
+
+        .header p {
+            font-size: 16px;
+            margin-top: 10px;
+            font-weight: normal;
+        }
+
+        /* حاوية المحتوى الأساسية */
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
             padding: 15px;
         }
-        img {
-            width: 100%;
-            max-width: 650px;
-            height: auto;
+
+        /* تصميم قسم الصور */
+        .images-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .images-section img {
+            width: 45%;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* تصميم كروت الفروع */
+        .branch-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
             margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            padding: 25px;
+            border-top: 5px solid #ff4757;
         }
-        .locations {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .locations h2 {
-            color: #333;
+
+        .branch-title {
+            font-size: 24px;
+            color: #2f3542;
             margin-bottom: 15px;
-            font-size: 22px;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #2ed573;
-            color: white;
-            padding: 12px 24px;
-            margin: 10px;
-            text-decoration: none;
-            border-radius: 8px;
             font-weight: bold;
-            font-size: 16px;
+        }
+
+        /* تصميم زر خرائط جوجل */
+        .map-btn {
+            display: block;
+            background-color: #1e90ff;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
             transition: background 0.3s;
         }
-        .btn:hover {
+
+        .map-btn:hover {
+            background-color: #1c7ed6;
+        }
+
+        /* تصميم أزرار الاتصال والواتساب */
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: block;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .btn-call {
+            background-color: #2ed573;
+        }
+        
+        .btn-call:hover {
             background-color: #27ae60;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebe57;
+        }
+
+        /* تذييل الصفحة */
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 14px;
+            color: #777;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        منيو مطعم Sizzle
-    </header>
+    <div class="header">
+        أهلاً وسهلاً بكم في مطعم سيزل
+        <p>اختر الفرع الأقرب إليك للطلب أو الاستفسار</p>
+    </div>
 
-    <div class="menu-container">
-        
-        <div class="locations">
-            <h2>مواقع فروعنا</h2>
-            <a href="https://maps.app.goo.gl/xPtynwPnG17FfyqL7" target="_blank" class="btn">موقع فرع حي البساتين</a>
-            <a href="https://maps.app.goo.gl/MDYbZ2mGE9w6DGBw6" target="_blank" class="btn">موقع فرع الصابيات - الرواد الاثرية</a>
+    <div class="container">
+        <div class="images-section">
+            <img src="1.jpeg" alt="صورة سيزل 1">
+            <img src="2.jpeg" alt="صورة سيزل 2">
         </div>
 
-        <img src="1.jpeg" alt="الصفحة الأولى من المنيو">
-        <img src="2.jpeg" alt="الصفحة الثانية من المنيو">
-        
+        <div class="branch-card">
+            <div class="branch-title">الفرع الأول: حي البساتين</div>
+            
+            <a href="https://maps.app.goo.gl/xPtynwPnG17FfyqL7" class="map-btn" target="_blank">
+                📍 موقع الفرع على خرائط جوجل
+            </a>
+            
+            <div class="contact-buttons">
+                <a href="tel:07700634208" class="btn btn-call">
+                    📞 اتصال هاتفي: 07700634208
+                </a>
+                <a href="https://wa.me/9647700634208" class="btn btn-whatsapp" target="_blank">
+                    💬 مراسلة على الواتساب
+                </a>
+            </div>
+        </div>
+
+        <div class="branch-card">
+            <div class="branch-title">الفرع الثاني: الصابيات - الرواد الاثرية</div>
+            
+            <a href="https://maps.app.goo.gl/MDYbZ2mGE9w6DGBw6" class="map-btn" target="_blank">
+                📍 موقع الفرع على خرائط جوجل
+            </a>
+            
+            <div class="contact-buttons">
+                <a href="tel:07700066443" class="btn btn-call">
+                    📞 اتصال هاتفي: 07700066443
+                </a>
+                <a href="https://wa.me/9647700066443" class="btn btn-whatsapp" target="_blank">
+                    💬 مراسلة على الواتساب
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        جميع الحقوق محفوظة © 2026
     </div>
 
 </body>
