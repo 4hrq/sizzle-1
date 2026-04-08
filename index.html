@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مطعم سيزل | Sizzle</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -11,120 +11,134 @@
             --dark: #1D3557;
             --light-bg: #F8F9FA;
             --white: #FFFFFF;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --radius: 16px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --radius: 20px;
         }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
         body {
             font-family: 'Cairo', sans-serif;
             background-color: var(--light-bg);
-            margin: 0;
-            padding: 0;
             color: #2B2D42;
+            overflow-x: hidden;
         }
 
-        /* تنسيق الهيدر واللوغو */
+        /* الهيدر */
         header {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px 0;
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
-        .header-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
+        .logo-img { height: 80px; width: auto; margin-bottom: 10px; }
+        .brand-name { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
 
-        .logo-img {
-            height: 70px;
-            width: auto;
-            display: block;
-        }
-
-        .brand-name {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin: 40px 0 20px;
-            font-weight: 800;
-            color: var(--dark);
-        }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
 
         /* كروت الفروع */
+        .section-title { text-align: center; margin: 30px 0 20px; font-weight: 800; font-size: 1.8rem; }
+
         .branch-card {
             background: white;
             border-radius: var(--radius);
             padding: 25px;
             margin-bottom: 25px;
             box-shadow: var(--shadow);
-            border-right: 5px solid var(--primary);
+            border-right: 6px solid var(--primary);
         }
 
-        .branch-name {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
+        .branch-name { font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
+        .branch-meta { font-size: 1.1rem; color: #666; margin-bottom: 20px; line-height: 1.6; }
 
-        .btn-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        
         .btn {
-            padding: 12px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 14px;
             text-decoration: none;
             text-align: center;
             font-weight: 700;
-            transition: 0.3s;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
         .btn-call { background: var(--dark); color: white; }
         .btn-wa { background: #25D366; color: white; }
-        .btn-map { background: #4285F4; color: white; grid-column: span 2; }
-        .btn-waze { background: #33CCFF; color: var(--dark); grid-column: span 2; }
+        /* زر الموقع الموحد */
+        .btn-location { background: #4285F4; color: white; grid-column: span 2; margin-top: 5px; }
 
         /* المنيو */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .menu-item { border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); cursor: pointer; }
+        .menu-item img { width: 100%; display: block; transition: 0.3s; }
+
+        /* نافذة اختيار الخرائط (التي تظهر من الأسفل) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            z-index: 2000;
+            align-items: flex-end;
         }
 
-        .menu-item img {
+        .modal-content {
+            background: white;
             width: 100%;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: var(--shadow);
+            padding: 30px 20px;
+            border-radius: 30px 30px 0 0;
+            animation: slideUp 0.3s ease-out;
         }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #888;
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+        .modal-title { text-align: center; margin-bottom: 25px; font-weight: 800; font-size: 1.4rem; }
+        
+        .map-option {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.2rem;
         }
+
+        .map-option:active { background: #eee; }
+        .map-option span { margin-left: 15px; font-size: 1.6rem; }
+
+        .close-modal { text-align: center; color: var(--primary); font-weight: 800; padding: 15px; cursor: pointer; }
+
+        /* المنيو بالشاشة الكاملة */
+        .full-menu-view {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: black;
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .full-menu-view img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+        .close-view { position: absolute; top: 20px; right: 20px; color: white; font-size: 3rem; cursor: pointer; }
+
+        footer { text-align: center; padding: 40px 20px; color: #aaa; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -132,7 +146,7 @@
     <header>
         <div class="header-container">
             <img src="logo.png" alt="Sizzle Logo" class="logo-img" onerror="this.style.display='none'">
-            <h1 class="brand-name">سيزل 🔥</h1>
+            <div class="brand-name">سيزل 🔥</div>
         </div>
     </header>
 
@@ -141,38 +155,76 @@
         <h2 class="section-title">فروعنا</h2>
 
         <div class="branch-card">
-            <h3 class="branch-name">فرع حي البساتين (الأول)</h3>
-            <p>📍 شارع الضباط | 📞 07700634208</p>
+            <h3 class="branch-name">فرع حي البساتين</h3>
+            <div class="branch-meta">📍 شارع الضباط <br> 📞 07700634208</div>
             <div class="btn-group">
-                <a href="tel:07700634208" class="btn btn-call">اتصال</a>
-                <a href="https://wa.me/9647700634208" class="btn btn-wa">واتساب</a>
-                <a href="https://maps.app.goo.gl/BJXz5EHQtyjMwzGD6" class="btn btn-map" target="_blank">📍 جوجل ماب</a>
-                <a href="https://waze.com/ul?q=مطعم+سيزل+حي+البساتين" class="btn btn-waze" target="_blank">🚗 تطبيق Waze</a>
+                <a href="tel:07700634208" class="btn btn-call">📞 اتصال</a>
+                <a href="https://wa.me/9647700634208" class="btn btn-wa">💬 واتساب</a>
+                <button class="btn btn-location" onclick="showMapSelector('https://maps.app.goo.gl/BJXz5EHQtyjMwzGD6', 'https://waze.com/ul?q=مطعم+سيزل+حي+البساتين')">📍 موقع المطعم</button>
             </div>
         </div>
 
         <div class="branch-card">
-            <h3 class="branch-name">فرع الصابيات (الثاني)</h3>
-            <p>📍 الرواد الاثرية | 📞 07700066443</p>
+            <h3 class="branch-name">فرع الصابيات</h3>
+            <div class="branch-meta">📍 الرواد الاثرية <br> 📞 07700066443</div>
             <div class="btn-group">
-                <a href="tel:07700066443" class="btn btn-call">اتصال</a>
-                <a href="https://wa.me/9647700066443" class="btn btn-wa">واتساب</a>
-                <a href="Https://maps.app.goo.gl/e5eJ4fexJgHBAgCV8" class="btn btn-map" target="_blank">📍 جوجل ماب</a>
-                <a href="https://waze.com/ul?q=مطعم+سيزل+الصابيات" class="btn btn-waze" target="_blank">🚗 تطبيق Waze</a>
+                <a href="tel:07700066443" class="btn btn-call">📞 اتصال</a>
+                <a href="https://wa.me/9647700066443" class="btn btn-wa">💬 واتساب</a>
+                <button class="btn btn-location" onclick="showMapSelector('Https://maps.app.goo.gl/e5eJ4fexJgHBAgCV8', 'https://waze.com/ul?q=مطعم+سيزل+الصابيات')">📍 موقع المطعم</button>
             </div>
         </div>
 
-        <h2 class="section-title">المنيو</h2>
+        <h2 class="section-title">قائمة الطعام</h2>
         <div class="menu-grid">
-            <div class="menu-item"><img src="33400.jpg" alt="Menu 1"></div>
-            <div class="menu-item"><img src="33401.jpg" alt="Menu 2"></div>
+            <div class="menu-item" onclick="openMenu('33400.jpg')"><img src="33400.jpg" alt="Menu 1"></div>
+            <div class="menu-item" onclick="openMenu('33401.jpg')"><img src="33401.jpg" alt="Menu 2"></div>
         </div>
 
     </div>
 
+    <div id="mapSelector" class="modal-overlay" onclick="closeMapSelector()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h3 class="modal-title">اختر تطبيق الخرائط</h3>
+            <a href="#" id="gmapLink" class="map-option" target="_blank"><span>📍</span> Google Maps</a>
+            <a href="#" id="wazeLink" class="map-option" target="_blank"><span>🚗</span> Waze</a>
+            <div class="close-modal" onclick="closeMapSelector()">إلغاء</div>
+        </div>
+    </div>
+
+    <div id="fullMenuView" class="full-menu-view" onclick="closeMenu()">
+        <span class="close-view">×</span>
+        <img id="fullMenuImg" src="">
+    </div>
+
     <footer>
-        <p>جميع الحقوق محفوظة لمطعم سيزل © 2026</p>
+        <p>© 2026 مطعم سيزل - جميع الحقوق محفوظة</p>
     </footer>
 
+    <script>
+        // وظائف الخرائط
+        function showMapSelector(gLink, wLink) {
+            document.getElementById('gmapLink').href = gLink;
+            document.getElementById('wazeLink').href = wLink;
+            document.getElementById('mapSelector').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMapSelector() {
+            document.getElementById('mapSelector').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // وظائف المنيو
+        function openMenu(src) {
+            document.getElementById('fullMenuImg').src = src;
+            document.getElementById('fullMenuView').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            document.getElementById('fullMenuView').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
