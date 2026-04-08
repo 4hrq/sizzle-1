@@ -45,7 +45,7 @@
             top: 0;
             z-index: 100;
             box-shadow: var(--shadow-sm);
-            padding: 15px 0;
+            padding: 10px 0; /* تقليل البادينغ */
         }
 
         .container {
@@ -67,7 +67,15 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px; /* مسافة بين اللوغو والاسم */
+        }
+
+        /* تنسيق اللوغو بحجم وسط */
+        .logo-img {
+            height: 50px; /* الارتفاع المطلوب */
+            width: auto;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         /* ===== العناوين والأقسام ===== */
@@ -268,7 +276,8 @@
     <header>
         <div class="container navbar">
             <a href="#" class="brand">
-                <span style="font-size: 1.5rem;">🔥</span> سيزل
+                <img src="logo.png" alt="شعار مطعم سيزل" class="logo-img">
+                <span class="brand-name">سيزل 🔥</span>
             </a>
         </div>
     </header>
@@ -293,7 +302,7 @@
                     <div class="btn-group">
                         <a href="tel:07700634208" class="btn btn-call">اتصال هاتفي</a>
                         <a href="https://wa.me/9647700634208" class="btn btn-wa" target="_blank" rel="noopener noreferrer">رسالة واتساب</a>
-                        <a href="https://maps.app.goo.gl/xPtynwPnG17FfyqL7" class="btn btn-gmap full-width" target="_blank" rel="noopener noreferrer">📍 موقع جوجل ماب</a>
+                        <a href="https://maps.app.goo.gl/LhknfawVn49yXPsV8" class="btn btn-gmap full-width" target="_blank" rel="noopener noreferrer">📍 موقع جوجل ماب</a>
                         <a href="https://waze.com/ul?q=مطعم+سيزل+حي+البساتين" class="btn btn-waze full-width" target="_blank" rel="noopener noreferrer">🚗 افتح في تطبيق Waze</a>
                     </div>
                 </article>
@@ -308,7 +317,7 @@
                     <div class="btn-group">
                         <a href="tel:07700066443" class="btn btn-call">اتصال هاتفي</a>
                         <a href="https://wa.me/9647700066443" class="btn btn-wa" target="_blank" rel="noopener noreferrer">رسالة واتساب</a>
-                        <a href="https://maps.app.goo.gl/MDYbZ2mGE9w6DGBw6" class="btn btn-gmap full-width" target="_blank" rel="noopener noreferrer">📍 موقع جوجل ماب</a>
+                        <a href="https://maps.app.goo.gl/XYkL1XCL1UvNK2hGA" class="btn btn-gmap full-width" target="_blank" rel="noopener noreferrer">📍 موقع جوجل ماب</a>
                         <a href="https://waze.com/ul?q=مطعم+سيزل+الصابيات" class="btn btn-waze full-width" target="_blank" rel="noopener noreferrer">🚗 افتح في تطبيق Waze</a>
                     </div>
                 </article>
@@ -336,7 +345,7 @@
 
     <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
         <div class="lightbox-content">
-            <button class="close-btn" onclick="closeLightbox(event)">&times;</button>
+            <button class="close-btn" onclick="closeLightbox(event)">×</button>
             <img id="lightbox-img" class="lightbox-img" src="" alt="المنيو مكبر">
         </div>
     </div>
@@ -352,15 +361,12 @@
         function openLightbox(imageSrc) {
             lightboxImg.src = imageSrc;
             lightbox.classList.add('active');
-            // هذا السطر يمنع المستخدم من عمل زوم أو النزول في الموقع الأصلي أثناء فتح الصورة
             document.body.style.overflow = 'hidden'; 
         }
 
         function closeLightbox(event) {
-            // إغلاق العارض فقط إذا ضغط المستخدم على زر الإغلاق أو الخلفية السوداء
             if (event.target === lightbox || event.target.classList.contains('close-btn')) {
                 lightbox.classList.remove('active');
-                // إعادة تفعيل التمرير للموقع
                 document.body.style.overflow = 'auto'; 
             }
         }
